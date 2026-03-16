@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teham & Arav | A Special Story</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Hind+Siliguri:wght@300;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --accent-color: #ff4d79;
+            --bg-color: #050505;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            font-family: 'Hind Siliguri', sans-serif;
+            background: var(--bg-color); color: #fff; overflow-x: hidden;
+        }
+
+        .full-screen {
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 20px; transition: opacity 0.8s ease;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Typography */
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
+        .cursive { font-family: 'Dancing Script', cursive; color: var(--accent-color); }
+        p { color: #ccc; max-width: 500px; line-height: 1.6; }
+
+        /* Scanner Style */
+        .scanner-container {
+            padding: 40px; border-radius: 30px; 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .finger-icon { font-size: 60px; color: var(--accent-color); cursor: pointer; transition: 0.3s; }
+        .scan-line {
+            width: 80px; height: 3px; background: var(--accent-color);
+            margin: 15px auto; box-shadow: 0 0 10px var(--accent-color);
+            animation: scanMove 2s infinite ease-in-out; display: none;
+        }
+        @keyframes scanMove { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(40px); } }
+
+        /* Envelope Styling */
+        .envelope-box {
+            position: relative; width: 280px; height: 160px;
+            background: #1a1a1a; margin: 60px 0; border-radius: 0 0 10px 10px;
+        }
+        .envelope-box::after {
+            content: ""; position: absolute; top: -100px; left: 0;
+            border-left: 140px solid transparent; border-right: 140px solid transparent;
+            border-bottom: 100px solid #252525; transition: 0.5s; transform-origin: bottom;
+        }
+        .envelope-box.open::after { transform: rotateX(180deg) translateY(100px); }
+        .letter {
+            position: absolute; bottom: 5px; left: 5%; width: 90%; height: 130px;
+            background: #fff; color: #111; padding: 15px; border-radius: 5px;
+            transition: 0.8s; z-index: 1; font-size: 0.85rem;
+        }
+        .envelope-box.open .letter { transform: translateY(-100px); z-index: 5; }
+
+        /* Gallery Card */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .gallery-grid img { width: 140px; height: 180px; border-radius: 15px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Buttons */
+        .btn {
+            background: none; border: 1px solid var(--accent-color); color: #fff;
+            padding: 12px 30px; border-radius: 50px; cursor: pointer;
+            font-size: 0.9rem; letter-spacing: 1px; margin: 10px; transition: 0.3s;
+        }
+        .btn:hover { background: var(--accent-color); box-shadow: 0 0 20px rgba(255, 77, 121, 0.4); }
+
+        /* Flower Rain */
+        .flower { position: fixed; top: -5vh; pointer-events: none; animation: fall 5s linear forwards; font-size: 1.2rem; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <section id="s1" class="full-screen">
+        <div class="scanner-container">
+            <h2 class="cursive">Verify Identity</h2>
+            <div onclick="doScan()">
+                <i class="fa-solid fa-fingerprint finger-icon" id="fIcon"></i>
+                <div class="scan-line" id="sLine"></div>
+            </div>
+            <p style="font-size: 0.7rem; margin-top: 20px; letter-spacing: 2px;">HOLD TO START YOUR STORY</p>
+        </div>
+    </section>
+
+    <section id="s2" class="full-screen hidden">
+        <h1 class="cursive">Hello, Saluk Pakhi🖤.</h1>
+        <p>কিছু মুহূর্ত যা আমাদের স্মৃতিতে রয়ে যায় চিরকাল। আপনার জন্য ছোট্ট একটি আয়োজন...</p>
+        <button class="btn" onclick="goTo(3)">চিঠিটি খুলুন</button>
+    </section>
+
+    <section id="s3" class="full-screen hidden">
+        <div class="envelope-box" id="env">
+            <div class="letter">
+                <b>মারিয়াম,</b><br><br>
+               আমি চাই সারাজিবন “শালুক" পেজটি চালাতে! 🌸<br>— কাইকর
+            </div>
+        </div>
+        <div>
+            <button class="btn" onclick="openMe()">OPEN</button>
+            <button class="btn hidden" id="toGallery" onclick="goTo(4)">NEXT</button>
+        </div>
+    </section>
+
+    <section id="s4" class="full-screen hidden">
+        <h2 class="cursive">Captured Moments ( আপনার )</h2>
+        <p> আপনার তোলা কিছু সুন্দর মূহুর্ত</p>
+        <div class="gallery-grid">
+            <img src="https://i.ibb.co/Zpvm8Rcg/received-894826716712868.jpg">
+            <img src="https://i.ibb.co/WWYswccL/received-1423964209425223.jpg">
+            <img src="https://i.ibb.co/6RVytLSs/received-2131682364299901.jpg">
+            <img src="https://i.ibb.co/zVBFk1Pc/received-1972389690037649.jpg">
+        </div>
+        <button class="btn" onclick="goTo(5)">THE QUESTION</button>
+    </section>
+
+    <section id="s5" class="full-screen hidden">
+        <h2 class="cursive" style="font-size: 2.5rem;">এত এফোর্ট দিচ্ছি... তাই</h2>
+        <p>ভেবেছেন ইগনোর করবেন? 👊</p>
+        <div style="margin-top: 20px;">
+            <button class="btn" onclick="finalRes('yes')">No</button>
+            <button class="btn" onclick="finalRes('no')">Yes</button>
+        </div>
+        <div id="final-txt" style="margin-top: 30px; font-size: 1.3rem; color: var(--accent-color);"></div>
+    </section>
+
+    <script>
+        // Go to specific section
+        function goTo(num) {
+            document.querySelectorAll('.full-screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById('s' + num).classList.remove('hidden');
+            if (num === 2) startRain();
+        }
+
+        // Scan Logic
+        function doScan() {
+            document.getElementById('sLine').style.display = 'block';
+            document.getElementById('fIcon').style.color = '#00ff88';
+            setTimeout(() => goTo(2), 2000);
+        }
+
+        // Envelope Logic
+        function openMe() {
+            document.getElementById('env').classList.add('open');
+            document.getElementById('toGallery').classList.remove('hidden');
+        }
+
+        // Final Logic
+        function finalRes(ans) {
+            const txt = document.getElementById('final-txt');
+            if(ans === 'yes') {
+                txt.innerHTML = "Thanks! আমি আপনার সবচেয়ে দূরের খারাপ পরিচিতজন হতে চাই! ✨";
+            } else {
+                txt.innerHTML = "Thanku 👊🥲";
+            }
+        }
+
+        // Flower Rain
+        function startRain() {
+            setInterval(() => {
+                const f = document.createElement('div');
+                f.className = 'flower';
+                f.innerHTML = '🌸';
+                f.style.left = Math.random() * 100 + 'vw';
+                f.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 5000);
+            }, 600);
+        }
+    </script>
+</body>
+</html>
